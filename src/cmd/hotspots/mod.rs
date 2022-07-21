@@ -1,6 +1,6 @@
 use crate::{cmd::*, result::Result};
 
-pub mod add;
+mod add;
 mod assert;
 mod list;
 mod transfer;
@@ -13,6 +13,13 @@ pub enum Cmd {
     Assert(assert::Cmd),
     List(list::Cmd),
     Transfer(Box<transfer::Cmd>),
+}
+
+impl Cmd {
+    pub fn get_add_cmd(txn: &str, commit: bool) -> Result<Self> {
+        let cmd = add::Cmd::new(txn, commit)?;
+        Ok(Cmd::Add(cmd))
+    }
 }
 
 impl Cmd {
