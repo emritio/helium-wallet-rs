@@ -1,6 +1,6 @@
 use crate::{cmd::*, result::Result};
 
-mod add;
+pub mod add;
 mod assert;
 mod list;
 mod transfer;
