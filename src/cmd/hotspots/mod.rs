@@ -16,13 +16,6 @@ pub enum Cmd {
 }
 
 impl Cmd {
-    pub fn get_add_cmd(txn: &str, commit: bool) -> Result<Self> {
-        let cmd = add::Cmd::new(txn, commit)?;
-        Ok(Cmd::Add(cmd))
-    }
-}
-
-impl Cmd {
     pub async fn run(self, opts: Opts) -> Result {
         match self {
             Self::Add(cmd) => cmd.run(opts).await,

@@ -4,7 +4,6 @@ use crate::{
     staking,
     traits::{TxnEnvelope, TxnSign},
 };
-use std::str::FromStr;
 
 #[derive(Debug, StructOpt)]
 /// Add a hotspot to the blockchain. The original transaction is created by the
@@ -28,13 +27,6 @@ pub struct Cmd {
 }
 
 impl Cmd {
-    pub fn new(txn: &str, commit: bool) -> Result<Cmd> {
-        Ok(Cmd {
-            txn: Some(Transaction::from_str(txn)?),
-            onboarding: None,
-            commit,
-        })
-    }
     pub async fn run(self, opts: Opts) -> Result {
         let mut txn = BlockchainTxnAddGatewayV1::from_envelope(&read_txn(&self.txn)?)?;
 
